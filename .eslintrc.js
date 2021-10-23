@@ -2,7 +2,9 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
+    greasemonkey: true,
   },
+  globals: ['GM_addStyle'],
   extends: ['airbnb-base'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
