@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AutoInsta
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  Auto follow, auto like
 // @author       anilmaharjan.com.np
 // @match        https://www.instagram.com/*
@@ -9,9 +9,39 @@
 // @grant        GM_addStyle
 // ==/UserScript==
 
-GM_addStyle(
-  '.auto-insta-ui {position: fixed; right:0; bottom:0; z-index: 99999; background: #fff; padding: 1rem;}'
-);
+GM_addStyle(`div.auto-insta-ui {
+  background-color: rgba(255,255,255,0.5);
+  border: 1px solid #ccc;
+  margin: 2px;
+  padding: 2rem;
+  position: fixed;
+  right:0;
+  bottom:0;
+  z-index: 99999;
+}
+div.auto-insta-ui h3{
+  font-weight: bold;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+div.auto-insta-ui button{
+  cursor: pointer;
+  padding: 1rem 1.5rem;
+  margin-bottom: 4px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+}
+div.auto-insta-ui button:last-child{
+  background-color: #800;
+}
+div.auto-insta-ui button:focus{
+  background-color: #585;
+}
+div.auto-insta-ui button:last-child:focus{
+  background-color: #855;
+}`);
+
 (function () {
   'use strict';
   let currentInterval: number | null = null;
@@ -120,9 +150,9 @@ GM_addStyle(
   const uiHead = document.createElement('h3');
   uiHead.innerHTML = 'Auto Insta';
   autoInstaUI.appendChild(uiHead);
-  autoInstaUI.appendChild(createUIButton('Auto like list', autoLikeList));
-  autoInstaUI.appendChild(createUIButton('Auto like Page', autoLikePage));
-  autoInstaUI.appendChild(createUIButton('Auto follow list', autoFollowList));
+  autoInstaUI.appendChild(createUIButton('Like list', autoLikeList));
+  autoInstaUI.appendChild(createUIButton('Like Page', autoLikePage));
+  autoInstaUI.appendChild(createUIButton('Follow', autoFollowList));
   autoInstaUI.appendChild(
     createUIButton('Clear current task', clearCurrentTask)
   );
